@@ -10,6 +10,9 @@ class Project(info: ProjectInfo)
   override def subversionRepository = Some("http://svn.local.twitter.com/maven-public")
   val twitterRepo = "twitter.com" at "http://maven.twttr.com"
 
+    override def managedStyle = ManagedStyle.Maven
+    val publishTo = 
+      Resolver.file("gitpages-local", new java.io.File( System.getProperty("user.home") + "/published-repo"))
   // Projects
 
   // util-core: extensions with no external dependency requirements
@@ -104,5 +107,9 @@ class Project(info: ProjectInfo)
     override def compileOptions = super.compileOptions ++ Seq(Unchecked) ++
       compileOptions("-encoding", "utf8") ++
       compileOptions("-deprecation")
+
+    override def managedStyle = ManagedStyle.Maven
+    val publishTo = 
+      Resolver.file("gitpages-local", new java.io.File( System.getProperty("user.home") + "/published-repo"))
   }
 }
